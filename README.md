@@ -167,9 +167,7 @@ See these snippets to learn how integrate a sync tool for your **Contact** and *
 class Account < ActiveRecord::Base
     ...
     def self.sync
-
         if !Account.isSynced
-
             get_salesforce_accounts.each do |account|
               acc_params = {:s_id => account.Id, :name => account.Name}
               if Account.exists?(:s_id => account.Id)
@@ -180,24 +178,16 @@ class Account < ActiveRecord::Base
                 acc.save
               end
             end
-
         end
-
     end
 
     def self.isSynced
-
         salesforceAccounts = get_salesforce_accounts
         databaseCount = Account.count
-
-        if salesforceAccounts.count == databaseCount
-          true
-        else
-          false
+        if salesforceAccounts.count != databaseCount
+            false
         end
-
     end
-
     ...
 end
 ```
