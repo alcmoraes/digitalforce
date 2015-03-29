@@ -1,5 +1,8 @@
 # Digitalforce
 
+[![Dependency Status](https://gemnasium.com/kalvinmoraes/digitalforce.svg)](https://gemnasium.com/kalvinmoraes/digitalforce)
+[![Code Climate](https://codeclimate.com/github/kalvinmoraes/digitalforce/badges/gpa.svg)](https://codeclimate.com/github/kalvinmoraes/digitalforce)
+
 Digitalforce is a ruby gem made to keep it simple to control your Contacts/Accounts in [Salesforce](http://www.salesforce.com).
 Taking advantage of [Restforce](https://github.com/ejholmes/restforce) to do the API requests, offering
 greater flexibility.
