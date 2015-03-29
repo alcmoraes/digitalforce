@@ -17,7 +17,7 @@ Features include:
 
 Add this line to your application's Gemfile:
 
-    gem 'digitalforce', :git => "https://github.com/kalvinmoraes/digitalforce.git"
+    gem 'digitalforce'
 
 And then execute:
 
