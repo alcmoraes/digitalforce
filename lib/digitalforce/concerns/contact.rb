@@ -22,10 +22,10 @@ module Digitalforce
 
       def manage_salesforce_contact_creation
         if self.new_record?
-          @userId = self.client.create('Contact', FirstName: self.name, LastName: self.last_name, AccountId: self.account_id, Email: self.email)
+          @userId = self.client.create('Contact', FirstName: self.name, LastName: self.last_name, AccountId: self.account_id, Email: self.email, Phone: self.phone)
           self.s_id = @userId
         else
-          self.client.update('Contact', Id: self.s_id, FirstName: self.name, LastName: self.last_name, AccountId: self.account_id, Email: self.email)
+          self.client.update('Contact', Id: self.s_id, FirstName: self.name, LastName: self.last_name, AccountId: self.account_id, Email: self.email, Phone: self.phone)
         end
         true
       end
