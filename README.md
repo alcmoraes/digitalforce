@@ -7,7 +7,7 @@ greater flexibility.
 Features include:
 
 * Create, Edit, Update and Destroy Contacts/Accounts from Salesforce direct from your rails application
-* Easily synchronize Contacts and Accounts from Salesforce with your database by using the get_salesforce_[accounts/contacts] method
+* Easily [synchronize](https://github.com/kalvinmoraes/digitalforce/blob/master/README.md#synchronizing) Contacts and Accounts from Salesforce with your database by using the get_salesforce_[accounts/contacts] method
 
 ## Installation
 
