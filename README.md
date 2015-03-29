@@ -6,7 +6,8 @@ greater flexibility.
 
 Features include:
 
-* Synchronize Contacts and Accounts from Salesforce with your database and vice versa
+* Create, Edit, Update and Destroy Contacts/Accounts from Salesforce direct from your rails application
+* Synchronize Contacts and Accounts from Salesforce with your database and vice versa (next release)
 
 ## Installation
 
