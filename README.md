@@ -1,5 +1,6 @@
 # Digitalforce
 
+[![Gem Version](https://badge.fury.io/rb/digitalforce.svg)](http://badge.fury.io/rb/digitalforce)
 [![Dependency Status](https://gemnasium.com/kalvinmoraes/digitalforce.svg)](https://gemnasium.com/kalvinmoraes/digitalforce)
 [![Code Climate](https://codeclimate.com/github/kalvinmoraes/digitalforce/badges/gpa.svg)](https://codeclimate.com/github/kalvinmoraes/digitalforce)
 
