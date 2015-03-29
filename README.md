@@ -4,9 +4,7 @@
 [![Dependency Status](https://gemnasium.com/kalvinmoraes/digitalforce.svg)](https://gemnasium.com/kalvinmoraes/digitalforce)
 [![Code Climate](https://codeclimate.com/github/kalvinmoraes/digitalforce/badges/gpa.svg)](https://codeclimate.com/github/kalvinmoraes/digitalforce)
 
-Digitalforce is a ruby gem made to keep it simple to control your Contacts/Accounts in [Salesforce](http://www.salesforce.com).
-Taking advantage of [Restforce](https://github.com/ejholmes/restforce) to do the API requests, offering
-greater flexibility.
+Digitalforce is a ruby gem made to keep it simple to control your Contacts/Accounts in [Salesforce](http://www.salesforce.com), taking advantage of [Restforce](https://github.com/ejholmes/restforce) to do the API requests, offering greater flexibility.
 
 Features include:
 
@@ -14,7 +12,7 @@ Features include:
 * Easily [synchronize](https://github.com/kalvinmoraes/digitalforce/blob/master/README.md#synchronizing) Contacts and Accounts from Salesforce with your database by using the get_salesforce_[accounts/contacts] method
 
 ## Installation
-
+I
 Add this line to your application's Gemfile:
 
     gem 'digitalforce'
@@ -31,7 +29,7 @@ To Digitalforce works, your models need to be tweeked a little. But don't worry.
 
 ### Configuration
 
-The first you'll need to do, is to edit your ``config/application.rb`` file and set the following:
+The first you'll need to do is to edit your ``config/application.rb`` file and set the following:
 
 ```ruby
 config.salesforce_config = {
@@ -43,17 +41,17 @@ config.salesforce_config = {
 }
 ```
 
-> **If you notice, we're not using the "password+securityToken" as documented in Salesforce. That's because Restforce do this for you. Keeping your configuration organized.**
+> **As you can notice, we're not using the "password+securityToken" as documented in Salesforce. That's because Restforce do this for you. Keeping your configuration organized.**
 
 ### Models
 
-Here you do our magic to keep your models synced with Salesforce objects.
+Here you do your magic to keep your models synced with Salesforce objects.
 
 First you'll need to have a Contact and Account models with a ``Contact belongs_to Account`` association.
 
 Do your migrations thing using the fields below:
 
-> **Note** *that you can add many fields you want for both tables, but only the described below will be synced with Salesforce, and because of that, it's mandatory to exist*
+> **Note** *that you can add as many fields as you want for both tables, but only the described below will be synced with Salesforce, and because of that, this is mandatory*
 
 **Contact**
 * name
@@ -67,8 +65,8 @@ Do your migrations thing using the fields below:
 
 After the magic ends, the following changes will need to be done in your migration file:
 
-* Set the primary key of both tables to be **:s_id** and must be a string
-* The **:account_id** in **Contacts** must be a **string** and should be set as index
+* Set both tables primary key to be string => **:s_id**
+* The **:account_id** in **Contacts** should be set as **index** and **string**
 
 **Here is how the file should look like**
 
@@ -118,7 +116,7 @@ class Account < ActiveRecord::Base
 end
 ```
 
-> **Here we set the contacts association, dependent. So when you delete an Account it will automatically exclude all Contacts. For documentation reasons, we use, but it's not mandatory.**
+> **Here we set the contact's association, dependent. This way when you delete an Account it will automatically exclude all Contacts. For documentation reasons we use it, but it's not mandatory.**
 
 ``application/app/models/contact.rb``
 ```ruby
@@ -131,7 +129,7 @@ end
 
 ### Integration with Digitalforce
 
-Now that you have your pretty models ready to go on fire. Let's integrate with Digitalforce
+Now that you have your pretty models ready to go on fire, let's integrate with Digitalforce
 
 ``application/app/models/contact.rb``
 ```ruby
@@ -157,14 +155,14 @@ class Account < ActiveRecord::Base
 end
 ```
 
-**Ta Da!** You did almost everything to start syncing your objects with Salesforce. Let's learn about these last modifications:
+**Ta Da!** You have done almost everything to start syncing your objects with Salesforce. Let's learn about these last modifications:
 
-* We include the **Digitalforce::Concerns** inside **Contact** and **Account** to get access to ours **acts_as_XXXX** behavior
-* We use **acts_as_contact** and **acts_as_account** inside our models passing the **connection** parameter that will be carrying, guess what? Yay! Your *salesforce_config* done in the first step.
+* We've included the **Digitalforce::Concerns** inside **Contact** and **Account** to get access to ours **acts_as_XXXX** behavior
+* We've used **acts_as_contact** and **acts_as_account** inside our models passing the **connection** parameter that will be carrying, guess what? Yay! Your *salesforce_config* config parameter created in the first step.
 
 ### Synchronizing
 
-See these snippets to learn how integrate a sync tool for your **Contact** and **Account** model
+See these snippets to learn how to integrate a sync tool into your **Contact** and **Account** model
 
 ``application/app/models/account.rb``
 ```ruby
@@ -199,7 +197,7 @@ end
 ```
 
 Using the **get_salesforce_[accounts/contacts]** method you can easily manage a synchronizing tool.
-In the above example we add the functionality to **Account** model to check if the database is synced with salesforce and a method to sync it (**self.isSynced** and **self.sync**)
+In the above example we've added to **Account** model the functionality to check if the database is synced with salesforce and a method to sync it (**self.isSynced** and **self.sync**)
 
 Taking this in advantage, you can now create a small snippet inside your ``application/app/views/accounts/index.html.erb`` just above the table iterating the account list, like this:
 
@@ -209,7 +207,7 @@ Taking this in advantage, you can now create a small snippet inside your ``appli
 <% end %>
 ```
 
-You see what we did it here? We used our brand new **isSynced** method we created for our Account model.
+You see what we've done here? We've used our brand new **isSynced** method from our Account model.
 If you run your server and click in "Sync now!", you'll probably get an error because you have not set the routes for **/accounts/sync**
 
 ``application/config/routes.db``
@@ -236,7 +234,7 @@ end
 
 ## Warnings, gotchas and tips
 
-Salesforce demands that a **Contact** belongs to an **Account**, so add **:required => true** for the Account dropdown:
+Salesforce demands that a **Contact** belongs to an **Account**, so add **:required => true** to the Account dropdown:
 
 ```ruby
 <%= f.collection_select(:account_id, Account.all, :s_id, :name, {:prompt => "Select your account"}, {:required => true}) %>
