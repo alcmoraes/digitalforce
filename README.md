@@ -173,7 +173,8 @@ class Account < ActiveRecord::Base
             get_salesforce_accounts.each do |account|
               acc_params = {:s_id => account.Id, :name => account.Name}
               if Account.exists?(:s_id => account.Id)
-                Account.update(acc_params)
+                acc = Account.find(account.Id)
+                acc.update(acc_params)
               else
                 acc = Account.new(acc_params)
                 acc.save
