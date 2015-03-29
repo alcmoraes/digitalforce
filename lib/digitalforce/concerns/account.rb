@@ -31,7 +31,7 @@ module Digitalforce
       end
 
       def manage_salesforce_account_destroy
-        if self.id
+        if self.s_id
           self.client.destroy('Account', self.s_id)
         end
         true
