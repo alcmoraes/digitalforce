@@ -184,8 +184,10 @@ class Account < ActiveRecord::Base
     def self.isSynced
         salesforceAccounts = get_salesforce_accounts
         databaseCount = Account.count
-        if salesforceAccounts.count != databaseCount
-            false
+        if salesforceAccounts.count == databaseCount
+          true
+        else
+          false
         end
     end
     ...
