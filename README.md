@@ -7,7 +7,7 @@ greater flexibility.
 Features include:
 
 * Create, Edit, Update and Destroy Contacts/Accounts from Salesforce direct from your rails application
-* Synchronize Contacts and Accounts from Salesforce with your database and vice versa (next release)
+* Easily synchronize Contacts and Accounts from Salesforce with your database by using the get_salesforce_[accounts/contacts] method
 
 ## Installation
 
@@ -157,6 +157,83 @@ end
 
 * We include the **Digitalforce::Concerns** inside **Contact** and **Account** to get access to ours **acts_as_XXXX** behavior
 * We use **acts_as_contact** and **acts_as_account** inside our models passing the **connection** parameter that will be carrying, guess what? Yay! Your *salesforce_config* done in the first step.
+
+### Synchronizing
+
+See these snippets to learn how integrate a sync tool for your **Contact** and **Account** model
+
+``application/app/models/account.rb``
+```ruby
+class Account < ActiveRecord::Base
+    ...
+    def self.sync
+
+        if !Account.isSynced
+
+            get_salesforce_accounts.each do |account|
+              acc_params = {:s_id => account.Id, :name => account.Name}
+              if Account.exists?(:s_id => account.Id)
+                Account.update(acc_params)
+              else
+                acc = Account.new(acc_params)
+                acc.save
+              end
+            end
+
+        end
+
+    end
+
+    def self.isSynced
+
+        salesforceAccounts = get_salesforce_accounts
+        databaseCount = Account.count
+
+        if salesforceAccounts.count == databaseCount
+          true
+        else
+          false
+        end
+
+    end
+
+    ...
+end
+```
+
+Using the **get_salesforce_[accounts/contacts]** method you can easily manage a synchronizing tool.
+In the above example we add the functionality to **Account** model to check if the database is synced with salesforce and a method to sync it (**self.isSynced** and **self.sync**)
+
+Taking this in advantage, you can now create a small snippet inside your ``application/app/views/accounts/index.html.erb`` just above the table iterating the account list, like this:
+
+```ruby
+<% if !Account.isSynced %>
+    The local data is not synced with Salesforce. <%= link_to 'Sync now!', '/accounts/sync' %>
+<% end %>
+```
+
+You see what we did it here? We used our brand new **isSynced** method we created for our Account model.
+If you run your server and click in "Sync now!", you'll probably get an error because you have not set the routes for **/accounts/sync**
+
+``application/config/routes.db``
+
+```ruby
+get 'accounts/sync' => 'accounts#sync'
+```
+
+And, of course, in our **AccountsController**:
+
+``application/app/controllers/accounts_controller``
+```ruby
+class AccountsController < ApplicationController
+    ...
+    def sync
+        Account.sync
+        redirect_to accounts_path
+    end
+    ...
+end
+```
 
 ---
 
