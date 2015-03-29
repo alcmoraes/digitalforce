@@ -152,7 +152,7 @@ class Account < ActiveRecord::Base
 end
 ```
 
-**Ta Da!** You have done almost everything to start syncing your objects with Salesforce. Let's learn about these last modifications:
+**Ta Da!** You did almost everything to start syncing your objects with Salesforce. Let's learn about these last modifications:
 
 * We include the **Digitalforce::Concerns** inside **Contact** and **Account** to get access to ours **acts_as_XXXX** behavior
 * We use **acts_as_contact** and **acts_as_account** inside our models passing the **connection** parameter that will be carrying, guess what? Yay! Your *salesforce_config* done in the first step.
