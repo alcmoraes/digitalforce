@@ -12,7 +12,7 @@ Features include:
 * Easily [synchronize](https://github.com/kalvinmoraes/digitalforce/blob/master/README.md#synchronizing) Contacts and Accounts from Salesforce with your database by using the get_salesforce_[accounts/contacts] method
 
 ## Installation
-I
+
 Add this line to your application's Gemfile:
 
     gem 'digitalforce'
