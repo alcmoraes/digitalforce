@@ -1,4 +1,6 @@
-# Digitalforce
+Resultados Digitais - RoR Challenge
+
+Obs.: This was a challenge made by @alcmoraes for Resultados Digitais agency
 
 [![Gem Version](https://badge.fury.io/rb/digitalforce.svg)](http://badge.fury.io/rb/digitalforce)
 [![Dependency Status](https://gemnasium.com/kalvinmoraes/digitalforce.svg)](https://gemnasium.com/kalvinmoraes/digitalforce)
